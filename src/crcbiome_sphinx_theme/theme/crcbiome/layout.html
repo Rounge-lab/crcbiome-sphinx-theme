@@ -1,0 +1,53 @@
+{% extends "!layout.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+
+  <link
+    rel="stylesheet"
+    href="{{ pathto('_static/crcbiome-rtd.css', 1) }}"
+    type="text/css"
+  >
+
+  <script>
+    (function () {
+      const storageKey = "crc-theme";
+      let savedTheme = null;
+
+      try {
+        savedTheme = localStorage.getItem(storageKey);
+      } catch (error) {
+        // Fall back to the system preference.
+      }
+
+      const theme =
+        savedTheme === "light" || savedTheme === "dark"
+          ? savedTheme
+          : window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+
+      document.documentElement.setAttribute("data-theme", theme);
+    }());
+  </script>
+
+  <script
+    defer
+    src="{{ pathto('_static/dark-mode-toggle.js', 1) }}"
+  ></script>
+{% endblock %}
+
+{% block footer %}
+  {{ super() }}
+
+  <button
+    id="crc-theme-toggle"
+    class="crc-theme-toggle"
+    type="button"
+    aria-label="Dark mode"
+    aria-pressed="false"
+    title="Switch to dark theme"
+  >
+    {% include "theme-toggle.svg" %}
+  </button>
+{% endblock %}
