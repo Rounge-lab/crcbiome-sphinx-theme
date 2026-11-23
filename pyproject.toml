@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crcbiome-sphinx-theme"
+version = "0.1.0"
+description = "Internal CRCbiome styling for Sphinx documentation with Read the Docs"
+requires-python = ">=3.12"
+dependencies = [
+    "Sphinx>=9",
+    "sphinx-rtd-theme>=3,<4",
+]
+classifiers = [
+    "Private :: Do Not Upload",
+]
+
+[project.entry-points."sphinx.html_themes"]
+crcbiome = "crcbiome_sphinx_theme"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+crcbiome_sphinx_theme = [
+    "theme/crcbiome/*.conf",
+    "theme/crcbiome/*.html",
+    "theme/crcbiome/*.svg",
+    "theme/crcbiome/static/*.css",
+    "theme/crcbiome/static/*.js",
+]
