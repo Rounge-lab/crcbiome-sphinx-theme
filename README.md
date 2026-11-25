@@ -31,13 +31,17 @@ The package installs Sphinx and `sphinx-rtd-theme` as dependencies.
 For reproducible documentation builds, pin to a release tag or full commit
 hash rather than a development branch.
 
-### With Pixi
+### In `pyproject.toml`
 
-Add the theme as a PyPI dependency in your documentation feature:
+You can declare the theme as a dependency in your `pyproject.toml`. In this
+example, the dependency is added to the optional `docs` environment:
 
 ```toml
-[feature.docs.pypi-dependencies]
-crcbiome-sphinx-theme = { git = "https://github.com/Rounge-lab/crcbiome-sphinx-theme.git", tag = "v0.1.0" }
+[project.optional-dependencies]
+docs = [
+    "sphinx",
+    "crcbiome-sphinx-theme @ git+https://github.com/Rounge-lab/crcbiome-sphinx-theme.git@v0.1.0",
+]
 ```
 
 ## Usage
@@ -46,10 +50,6 @@ Set the theme in your Sphinx `conf.py`:
 
 ```python
 html_theme = "crcbiome"
-
-html_theme_options = {
-    "logo_only": True, # Optional
-}
 ```
 
 Sphinx discovers the installed theme automatically. There is no need to add
